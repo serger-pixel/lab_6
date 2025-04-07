@@ -4,14 +4,19 @@ namespace lab_6
 {
     public partial class Form1 : Form
     {
+        // Список значений
         List<int> _list;
 
+        // Минимальное значение
         private const int MIN = 10;
 
+        // Максимальное значение
         private const int MAX = 1000;
 
+        // Длина списка
         private const int LENGTH = 100;
 
+        // Создание списка
         private async Task<List<int>> loadList()
         {
             Random random = new Random();
@@ -19,11 +24,13 @@ namespace lab_6
             for (int i = 0; i < localList.Capacity; i++) { localList.Add(random.Next(MIN, MAX)); }
             return localList;
         }
+
         public Form1()
         {
             InitializeComponent();
         }
 
+        // Запуск функций и получение результатов
         private async void calculateRes_Click(object sender, EventArgs e)
         {
              _list = await loadList();
