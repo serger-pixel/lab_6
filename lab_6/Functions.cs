@@ -41,19 +41,18 @@ namespace lab_6
         static void setBox<T>(T value, TextBox box) { box.Text = value.ToString(); }
 
         // Отображение результата получения системного времени
-        public static async void viewResult(TextBox box)
+        public static  void viewResult(TextBox box)
         {
             setBox<string>(getTime(), box);
         }
 
         // Отображение результата в зависимости от типа
-        public static async void viewResult(TextBox box, List<int> container, OPERATION type)
+        public static void viewResult(TextBox box, List<int> container, OPERATION type)
         {
             if (type == OPERATION.SUM) 
             {
                 setBox<int>(getSum(container), box);
-            }
-            else
+            }            else
             {
                 setBox<int>(getAverage(container), box);
             }

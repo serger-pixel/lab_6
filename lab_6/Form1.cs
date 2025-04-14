@@ -17,7 +17,7 @@ namespace lab_6
         private const int LENGTH = 100;
 
         // Создание списка
-        private async Task<List<int>> loadList()
+        private List<int> loadList()
         {
             Random random = new Random();
             List<int> localList = new List<int>(LENGTH);
@@ -31,13 +31,12 @@ namespace lab_6
         }
 
         // Запуск функций и получение результатов
-        private async void calculateRes_Click(object sender, EventArgs e)
+        private void calculateRes_Click(object sender, EventArgs e)
         {
-             _list = await loadList();
-            Functions.viewResult(timeBox);
-            Functions.viewResult(sumBox, _list, Functions.OPERATION.SUM);
-            Functions.viewResult(averageBox, _list, Functions.OPERATION.AVERAGE);
-
+             _list = loadList();
+            Task.Run(() =>Functions.viewResult(timeBox));
+            Task.Run(()=>Functions.viewResult(sumBox, _list, Functions.OPERATION.SUM));
+            Task.Run(() => Functions.viewResult(averageBox, _list, Functions.OPERATION.AVERAGE));
         }
     }
 }
