@@ -1,4 +1,6 @@
 using System.Numerics;
+using System.Threading;
+using System.Timers;
 
 namespace lab_6
 {
@@ -30,13 +32,28 @@ namespace lab_6
             InitializeComponent();
         }
 
-        // Запуск функций и получение результатов
-        private void calculateRes_Click(object sender, EventArgs e)
+        // Отображение реультата нахождения ср. значения
+        private async void calculateAvg_Click(object sender, EventArgs e)
         {
-             _list = loadList();
-            Task.Run(() =>Functions.viewResult(timeBox));
-            Task.Run(()=>Functions.viewResult(sumBox, _list, Functions.OPERATION.SUM));
-            Task.Run(() => Functions.viewResult(averageBox, _list, Functions.OPERATION.AVERAGE));
+            _list = loadList();
+            await Task.Run(() => Functions.viewResult(averageBox, _list, Functions.OPERATION.AVERAGE));
         }
+
+        // Отображение реультата отображения времени
+        private void calculateTime_Click(object sender, EventArgs e)
+        {
+            calculateTime.Enabled = false;
+            System.Threading.Timer timer = new System.Threading.Timer((Object state) => Functions.viewResult(timeBox), null, 0, 1000);
+        }
+        
+        // Отображение результата нахождения суммы
+        private async void calculateSum_Click(object sender, EventArgs e)
+        {
+            _list = loadList();
+            await Task.Run(() => Functions.viewResult(sumBox, _list, Functions.OPERATION.SUM));
+        }
+
+
+
     }
 }
